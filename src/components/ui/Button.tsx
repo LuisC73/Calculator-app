@@ -1,15 +1,15 @@
-interface ButtonProps {
-  label: string;
-  type: 'primary' | 'secondary' | 'danger';
-  action: () => void;
-}
+import { buttonStyles } from '../../data/buttonsConfig';
+import { ButtonProps } from '../../types';
+import clsx from 'clsx';
 
 export const Button = ({ label, type, action }: ButtonProps) => {
+  const buttonClass = clsx(
+    'w-full py-2 px-4 rounded-lg font-spartan font-bold transition',
+    buttonStyles[type]
+  );
+
   return (
-    <button
-      className="bg-theme-primary-orange-key-background w-full p-4 rounded-lg text-theme-primary-text font-spartan font-bold text-2xl"
-      onClick={action}
-    >
+    <button className={buttonClass} onClick={action}>
       {label}
     </button>
   );
