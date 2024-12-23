@@ -1,6 +1,4 @@
-interface DisplayProps {
-  value: string;
-}
+import { DisplayProps } from "@types";
 
 export const Display = ({ value }: DisplayProps) => {
   return (

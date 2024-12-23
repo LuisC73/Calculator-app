@@ -1,5 +1,5 @@
 import { buttonStyles } from '../../data/buttonsConfig';
-import { ButtonProps } from '../../types';
+import { ButtonProps } from '@types';
 import clsx from 'clsx';
 
 export const Button = ({ label, type, action }: ButtonProps) => {
