@@ -11,14 +11,13 @@ export const SwitchItem = ({ id, label, active, action }: SwitchItemProps) => {
     <label
       htmlFor={id}
       className={labelClass}
+      onClick={action}
     >
       <input
         type="radio"
         name={id}
         id={id}
         className="hidden"
-        checked
-        onChange={action}
       />
       <span className="absolute -top-7 left-1/2 font-spartan text-theme-primary-white -translate-x-1/2 text-sm">
         {label}

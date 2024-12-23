@@ -1,4 +1,4 @@
-import { buttonStyles } from '../../data/buttonsConfig';
+import { buttonStyles } from '../../content';
 import { ButtonProps } from '@types';
 import clsx from 'clsx';
 
@@ -9,7 +9,10 @@ export const Button = ({ label, type, action }: ButtonProps) => {
   );
 
   return (
-    <button className={buttonClass} onClick={action}>
+    <button
+      className={buttonClass}
+      onClick={action}
+    >
       {label}
     </button>
   );

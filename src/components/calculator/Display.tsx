@@ -1,4 +1,4 @@
-import { DisplayProps } from "@types";
+import { DisplayProps } from '@types';
 
 export const Display = ({ value }: DisplayProps) => {
   return (
