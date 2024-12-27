@@ -5,7 +5,7 @@ import { switchConfig } from './content';
 
 export const CalculatorApp = () => {
   const [displayValue, setDisplayValue] = useState<string>('');
-  const [theme, setTheme] = useState<string>('theme-01');
+  const [theme, setTheme] = useState<string>('theme-primary');
 
   const onClick = (value: string) => {
     if (value === 'DEL' && value.length === 1) return;

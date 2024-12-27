@@ -29,7 +29,7 @@ export const buttonStyles = {
 };
 
 export const switchConfig = [
-  { id: 'theme-01', label: '1' },
-  { id: 'theme-02', label: '2' },
-  { id: 'theme-03', label: '3' },
+  { id: 'theme-primary', label: '1' },
+  { id: 'theme-secondary', label: '2' },
+  { id: 'theme-tertiary', label: '3' },
 ];
