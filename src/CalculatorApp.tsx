@@ -1,12 +1,20 @@
 import { useState } from 'react';
 import { Display, KeyPad, Switch, SwitchItem } from './components';
+import { evaluate } from 'mathjs';
 import { switchConfig } from './content';
 
 export const CalculatorApp = () => {
-  const [displayValue, setDisplayValue] = useState('0');
-  const [theme, setTheme] = useState('theme-01');
+  const [displayValue, setDisplayValue] = useState<string>('');
+  const [theme, setTheme] = useState<string>('theme-01');
 
   const onClick = (value: string) => {
+    if (value === 'DEL' && value.length === 1) return;
+
+    if (value === 'DEL') {
+      setDisplayValue((prev: string) => prev.slice(0, -1));
+      return;
+    }
+
     setDisplayValue((prev: string) => prev + value);
   };
 
@@ -15,11 +23,13 @@ export const CalculatorApp = () => {
   };
 
   const onReset = () => {
-    setDisplayValue('0');
+    setDisplayValue('');
   };
 
   const onEqual = () => {
-    console.log('value', displayValue);
+    const processedInput = displayValue.replace(/x/g, '*');
+    const evalResult = evaluate(processedInput);
+    setDisplayValue(evalResult.toString());
   };
 
   return (
