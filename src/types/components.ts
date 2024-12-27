@@ -19,3 +19,9 @@ export interface SwitchItemProps {
   active: boolean;
   action: () => void;
 }
+
+export interface KeyPadProps {
+  actionButton: (value: string) => void;
+  actionReset: () => void;
+  actionEqual: () => void;
+}

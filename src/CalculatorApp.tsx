@@ -1,19 +1,60 @@
+import { useState } from 'react';
 import { Display, KeyPad, Switch, SwitchItem } from './components';
+import { evaluate } from 'mathjs';
+import { switchConfig } from './content';
 
 export const CalculatorApp = () => {
+  const [displayValue, setDisplayValue] = useState<string>('');
+  const [theme, setTheme] = useState<string>('theme-01');
+
+  const onClick = (value: string) => {
+    if (value === 'DEL' && value.length === 1) return;
+
+    if (value === 'DEL') {
+      setDisplayValue((prev: string) => prev.slice(0, -1));
+      return;
+    }
+
+    setDisplayValue((prev: string) => prev + value);
+  };
+
+  const onSwith = (value: string) => {
+    setTheme(value);
+  };
+
+  const onReset = () => {
+    setDisplayValue('');
+  };
+
+  const onEqual = () => {
+    const processedInput = displayValue.replace(/x/g, '*');
+    const evalResult = evaluate(processedInput);
+    setDisplayValue(evalResult.toString());
+  };
+
   return (
     <div className="bg-theme-primary-main-background min-h-screen w-full flex flex-col justify-center items-center font-spartan">
       <div className="flex flex-col gap-6 max-w-[500px] w-full">
         <div className="flex justify-between items-center">
           <h1 className="text-theme-primary-white font-bold text-3xl">calc</h1>
           <Switch title="Theme">
-            <SwitchItem id="theme-01" label="1" active={true} action={() => {}} />
-            <SwitchItem id="theme-02" label="2" active={false} action={() => {}} />
-            <SwitchItem id="theme-03" label="3" active={false} action={() => {}} />
+            {switchConfig.map((item, index) => (
+              <SwitchItem
+                key={index}
+                id={item.id}
+                label={item.label}
+                active={theme === item.id}
+                action={() => onSwith(item.id)}
+              />
+            ))}
           </Switch>
         </div>
-        <Display value="339, 99" />
-        <KeyPad />
+        <Display value={displayValue} />
+        <KeyPad
+          actionButton={onClick}
+          actionReset={onReset}
+          actionEqual={onEqual}
+        />
       </div>
     </div>
   );
