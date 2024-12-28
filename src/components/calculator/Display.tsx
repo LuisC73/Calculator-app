@@ -1,28 +1,35 @@
-import { DisplayProps } from '@types';
-import { clsx } from 'clsx';
 import { useEffect, useState } from 'react';
-
-const getFontSizeClass = (length: number) => {
-  if (length >= 27) return 'text-2xl';
-  if (length >= 23) return 'text-3xl';
-  if (length >= 17) return 'text-4xl';
-  if (length >= 13) return 'text-5xl';
-
-  return 'text-6xl';
-};
+import { DisplayProps } from '@types';
+import { useTheme } from '@hooks';
+import { getFontSizeClass } from '@helpers';
+import { clsx } from 'clsx';
 
 export const Display = ({ value }: DisplayProps) => {
+  const { theme } = useTheme();
   const [fontSizeClass, setFontSizeClass] = useState(getFontSizeClass(value.length));
+
+  const displayClass = clsx(
+    'h-[125px] py-8 px-6 rounded-lg flex justify-end items-center overflow-hidden',
+    {
+      'bg-theme-primary-screen-background': theme === 'theme-primary',
+      'bg-theme-secondary-screen-background': theme === 'theme-secondary',
+      'bg-theme-tertiary-screen-background': theme === 'theme-tertiary',
+    }
+  );
+
+  const textClass = clsx('font-bold truncate', fontSizeClass, {
+    'text-theme-primary-white': theme === 'theme-primary',
+    'text-theme-secondary-text': theme === 'theme-secondary',
+    'text-theme-tertiary-white': theme === 'theme-tertiary',
+  });
 
   useEffect(() => {
     setFontSizeClass(getFontSizeClass(value.length));
   }, [value.length]);
 
   return (
-    <div className="bg-theme-primary-screen-background h-[125px] py-8 px-6 rounded-lg flex justify-end items-center overflow-hidden">
-      <span className={clsx('text-theme-primary-white font-bold truncate', fontSizeClass)}>
-        {value || '0'}
-      </span>
+    <div className={displayClass}>
+      <span className={textClass}>{value || '0'}</span>
     </div>
   );
 };

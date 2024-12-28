@@ -21,6 +21,17 @@ export default {
           'text': '#444b5a',
           'white': '#ffffff',
         },
+        'theme-secondary': {
+          'main-background': '#e6e6e6',
+          'toggle-background': '#d1cccc',
+          'screen-background': '#ededed',
+          'key-background': '#377f86',
+          'key-hover': '#1b5f65',
+          'orange-key-background': '#ca5502',
+          'orange-key-hover': '#F96C5B',
+          'yellow-key-background': '#e5e4e1',
+          'text': '#35352c',
+        },
       },
       boxShadow: {
         'theme-primary-key': '0 4px 0 #404e72',

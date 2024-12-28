@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { Display, KeyPad, Switch, SwitchItem } from './components';
+import { Display, KeyPad, Switch, SwitchItem } from '@components';
 import { evaluate } from 'mathjs';
-import { switchConfig } from './content';
+import { switchConfig } from '@content';
+import { useTheme } from '@hooks';
+import { clsx } from 'clsx';
 
 export const CalculatorApp = () => {
   const [displayValue, setDisplayValue] = useState<string>('');
-  const [theme, setTheme] = useState<string>('theme-primary');
+  const { theme, setTheme } = useTheme();
 
   const onClick = (value: string) => {
     if (value === 'DEL' && value.length === 1) return;
@@ -32,11 +34,21 @@ export const CalculatorApp = () => {
     setDisplayValue(evalResult.toString());
   };
 
+  const containerClass = clsx('min-h-screen w-full flex flex-col justify-center items-center font-spartan', {
+    'bg-theme-primary-main-background': theme === 'theme-primary',
+    'bg-theme-secondary-main-background': theme === 'theme-secondary',
+  });
+
+  const titleClass = clsx('font-bold text-3xl', {
+    'text-theme-primary-white': theme === 'theme-primary',
+    'text-theme-secondary-text': theme === 'theme-secondary',
+  })
+
   return (
-    <div className="bg-theme-primary-main-background min-h-screen w-full flex flex-col justify-center items-center font-spartan">
+    <div className={containerClass}>
       <div className="flex flex-col gap-6 max-w-[500px] w-full">
         <div className="flex justify-between items-center">
-          <h1 className="text-theme-primary-white font-bold text-3xl">calc</h1>
+          <h1 className={titleClass}>calc</h1>
           <Switch title="Theme">
             {switchConfig.map((item, index) => (
               <SwitchItem
