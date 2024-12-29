@@ -4,7 +4,7 @@ import { useTheme } from '@hooks';
 import { getFontSizeClass } from '@helpers';
 import { clsx } from 'clsx';
 
-export const Display = ({ value }: DisplayProps) => {
+export const Display = ({ value, error }: DisplayProps) => {
   const { theme } = useTheme();
   const [fontSizeClass, setFontSizeClass] = useState(getFontSizeClass(value.length));
 
@@ -29,7 +29,11 @@ export const Display = ({ value }: DisplayProps) => {
 
   return (
     <div className={displayClass}>
-      <span className={textClass}>{value || '0'}</span>
+      {error ? (
+        <span className="font-bold truncate transition text-red-500 text-2xl">{error}</span>
+      ) : (
+        <span className={textClass}>{value || '0'}</span>
+      )}
     </div>
   );
 };

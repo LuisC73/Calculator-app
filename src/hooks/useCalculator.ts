@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTheme } from './useTheme';
 import { evaluate } from 'mathjs';
 
@@ -8,10 +8,24 @@ const initTheme = () => {
 
 export const useCalculator = () => {
   const [displayValue, setDisplayValue] = useState<string>('');
+  const [error, setError] = useState<string>('');
   const { setTheme } = useTheme();
   const initialTheme = initTheme();
 
   if (initialTheme) setTheme(initialTheme);
+
+  useEffect(() => {
+    if (!error) return;
+
+    const timerError = setTimeout(() => {
+      setError('');
+      setDisplayValue('');
+    }, 2000);
+
+    return () => {
+      clearTimeout(timerError);
+    };
+  }, [error]);
 
   const onClick = (id: string, value: string) => {
     if (id === 'delete' && value.length === 1) return;
@@ -24,7 +38,7 @@ export const useCalculator = () => {
     setDisplayValue((prev: string) => prev + value);
   };
 
-  const onSwith = (value: string) => {
+  const onSwitch = (value: string) => {
     setTheme(value);
     localStorage.setItem('theme', value);
   };
@@ -34,15 +48,24 @@ export const useCalculator = () => {
   };
 
   const onEqual = () => {
-    const processedInput = displayValue.replace(/x/g, '*');
-    const evalResult = evaluate(processedInput);
-    setDisplayValue(evalResult.toString());
+    try {
+      const processedInput = displayValue.replace(/x/g, '*');
+      const evalResult = evaluate(processedInput);
+      setDisplayValue(evalResult.toString());
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError('An unknown error occurred');
+      }
+    }
   };
 
   return {
     displayValue,
+    error,
     onClick,
-    onSwith,
+    onSwitch,
     onReset,
     onEqual,
   };

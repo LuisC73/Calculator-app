@@ -4,7 +4,7 @@ import { useCalculator, useTheme } from '@hooks';
 import { clsx } from 'clsx';
 
 export const CalculatorApp = () => {
-  const { displayValue, onClick, onSwith, onEqual, onReset } = useCalculator();
+  const { displayValue, error, onClick, onSwitch, onEqual, onReset } = useCalculator();
   const { theme } = useTheme();
 
   const containerClass = clsx(
@@ -34,12 +34,15 @@ export const CalculatorApp = () => {
                 id={item.id}
                 label={item.label}
                 active={theme === item.id}
-                action={() => onSwith(item.id)}
+                action={() => onSwitch(item.id)}
               />
             ))}
           </Switch>
         </div>
-        <Display value={displayValue} />
+        <Display
+          value={displayValue}
+          error={error}
+        />
         <KeyPad
           actionButton={onClick}
           actionReset={onReset}
