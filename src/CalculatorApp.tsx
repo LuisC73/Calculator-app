@@ -8,7 +8,7 @@ export const CalculatorApp = () => {
   const { theme } = useTheme();
 
   const containerClass = clsx(
-    'min-h-screen w-full flex flex-col justify-center items-center font-spartan',
+    'min-h-screen w-full flex flex-col justify-center items-center font-spartan p-6 transition',
     {
       'bg-theme-primary-main-background': theme === 'theme-primary',
       'bg-theme-secondary-main-background': theme === 'theme-secondary',
@@ -16,7 +16,7 @@ export const CalculatorApp = () => {
     }
   );
 
-  const titleClass = clsx('font-bold text-3xl', {
+  const titleClass = clsx('font-bold text-4xl md:text-3xl transition', {
     'text-white': theme === 'theme-primary',
     'text-theme-secondary-text': theme === 'theme-secondary',
     'text-theme-tertiary-text-yellow': theme === 'theme-tertiary',

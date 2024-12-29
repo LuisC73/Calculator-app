@@ -5,13 +5,13 @@ import { clsx } from 'clsx';
 export const Switch = ({ title, children }: SwitchProps) => {
   const { theme } = useTheme();
 
-  const textClass = clsx('uppercase text-sm font-bold font-spartan', {
+  const textClass = clsx('uppercase text-sm font-bold font-spartan transition', {
     'text-theme-primary-white': theme === 'theme-primary',
     'text-theme-secondary-text': theme === 'theme-secondary',
     'text-theme-tertiary-text-yellow': theme === 'theme-tertiary',
   });
 
-  const switchContainerClass = clsx('flex rounded-full p-1.5', {
+  const switchContainerClass = clsx('flex rounded-full p-1.5 transition', {
     'bg-theme-primary-toggle-background': theme === 'theme-primary',
     'bg-theme-secondary-toggle-background': theme === 'theme-secondary',
     'bg-theme-tertiary-toggle-background': theme === 'theme-tertiary',
