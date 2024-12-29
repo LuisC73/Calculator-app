@@ -7,7 +7,7 @@ import { clsx } from 'clsx';
 export const KeyPad = ({ actionButton, actionReset, actionEqual }: KeyPadProps) => {
   const { theme } = useTheme();
 
-  const containerClass = clsx('flex flex-col gap-6 p-6 rounded-lg', {
+  const containerClass = clsx('flex flex-col gap-6 p-6 rounded-lg transition', {
     'bg-theme-primary-toggle-background': theme === 'theme-primary',
     'bg-theme-secondary-toggle-background': theme === 'theme-secondary',
     'bg-theme-tertiary-toggle-background': theme === 'theme-tertiary',
@@ -15,23 +15,26 @@ export const KeyPad = ({ actionButton, actionReset, actionEqual }: KeyPadProps) 
 
   return (
     <div className={containerClass}>
-      <div className="grid grid-cols-4 gap-6">
-        {buttonsConfig.map((button, index) => (
+      <div className="grid grid-cols-4 gap-4 md:gap-6">
+        {buttonsConfig.map((button) => (
           <Button
-            key={index}
+            key={button.id}
+            id={button.id}
             label={button.label}
             type={button.type}
-            action={() => actionButton(button.label)}
+            action={() => actionButton(button.id, button.label)}
           />
         ))}
       </div>
       <div className="flex gap-4">
         <Button
+          id="reset"
           label="RESET"
           type="secondary"
           action={actionReset}
         />
         <Button
+          id="result"
           label="="
           type="danger"
           action={actionEqual}

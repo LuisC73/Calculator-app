@@ -1,4 +1,5 @@
 export interface ButtonProps {
+  id: string;
   label: string;
   type: 'primary' | 'secondary' | 'danger';
   action: () => void;
@@ -21,7 +22,7 @@ export interface SwitchItemProps {
 }
 
 export interface KeyPadProps {
-  actionButton: (value: string) => void;
+  actionButton: (id: string, value: string) => void;
   actionReset: () => void;
   actionEqual: () => void;
 }
