@@ -4,8 +4,8 @@ import { useCalculator, useTheme } from '@hooks';
 import { clsx } from 'clsx';
 
 export const CalculatorApp = () => {
-  const { displayValue, onClick, onSwith, onEqual, onReset } = useCalculator();
-  const { theme } = useTheme();
+  const { displayValue, error, handleButtonClick, clearDisplay, calculateResult } = useCalculator();
+  const { theme, changeTheme } = useTheme();
 
   const containerClass = clsx(
     'min-h-screen w-full flex flex-col justify-center items-center font-spartan p-6 transition',
@@ -34,16 +34,19 @@ export const CalculatorApp = () => {
                 id={item.id}
                 label={item.label}
                 active={theme === item.id}
-                action={() => onSwith(item.id)}
+                action={() => changeTheme(item.id)}
               />
             ))}
           </Switch>
         </div>
-        <Display value={displayValue} />
+        <Display
+          value={displayValue}
+          error={error}
+        />
         <KeyPad
-          actionButton={onClick}
-          actionReset={onReset}
-          actionEqual={onEqual}
+          actionButton={handleButtonClick}
+          actionReset={clearDisplay}
+          actionEqual={calculateResult}
         />
       </div>
     </div>

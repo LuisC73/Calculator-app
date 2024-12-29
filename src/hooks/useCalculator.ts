@@ -1,20 +1,25 @@
-import { useState } from 'react';
-import { useTheme } from './useTheme';
+import { useEffect, useState } from 'react';
 import { evaluate } from 'mathjs';
-
-const initTheme = () => {
-  return localStorage.getItem('theme') || 'theme-primary';
-};
 
 export const useCalculator = () => {
   const [displayValue, setDisplayValue] = useState<string>('');
-  const { setTheme } = useTheme();
-  const initialTheme = initTheme();
+  const [error, setError] = useState<string | null>(null);
 
-  if (initialTheme) setTheme(initialTheme);
+  useEffect(() => {
+    if (!error) return;
 
-  const onClick = (id: string, value: string) => {
-    if (id === 'delete' && value.length === 1) return;
+    const timerError = setTimeout(() => {
+      setError(null);
+      setDisplayValue('');
+    }, 2000);
+
+    return () => {
+      clearTimeout(timerError);
+    };
+  }, [error]);
+
+  const handleButtonClick = (id: string, value: string) => {
+    if (id === 'delete' && displayValue.length === 1) return;
 
     if (id === 'delete') {
       setDisplayValue((prev: string) => prev.slice(0, -1));
@@ -24,26 +29,27 @@ export const useCalculator = () => {
     setDisplayValue((prev: string) => prev + value);
   };
 
-  const onSwith = (value: string) => {
-    setTheme(value);
-    localStorage.setItem('theme', value);
-  };
+  const clearDisplay = () => setDisplayValue('');
 
-  const onReset = () => {
-    setDisplayValue('');
-  };
-
-  const onEqual = () => {
-    const processedInput = displayValue.replace(/x/g, '*');
-    const evalResult = evaluate(processedInput);
-    setDisplayValue(evalResult.toString());
+  const calculateResult = () => {
+    try {
+      const processedInput = displayValue.replace(/x/g, '*');
+      const evalResult = evaluate(processedInput);
+      setDisplayValue(evalResult.toString());
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError('An unknown error occurred');
+      }
+    }
   };
 
   return {
     displayValue,
-    onClick,
-    onSwith,
-    onReset,
-    onEqual,
+    error,
+    handleButtonClick,
+    clearDisplay,
+    calculateResult,
   };
 };
