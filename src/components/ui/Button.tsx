@@ -1,11 +1,14 @@
-import { buttonStyles } from '../../content';
 import { ButtonProps } from '@types';
-import clsx from 'clsx';
+import { buttonStyles } from '@config';
+import { clsx } from 'clsx';
+import { useTheme } from '@hooks';
 
 export const Button = ({ label, type, action }: ButtonProps) => {
+  const { theme } = useTheme();
+
   const buttonClass = clsx(
     'w-full py-2 px-4 rounded-lg font-spartan font-bold transition',
-    buttonStyles[type]
+    buttonStyles?.[theme]?.[type]
   );
 
   return (
