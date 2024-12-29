@@ -1,5 +1,5 @@
 import { Display, KeyPad, Switch, SwitchItem } from '@components';
-import { switchConfig } from './config';
+import { switchConfig } from '@config';
 import { useCalculator, useTheme } from '@hooks';
 import { clsx } from 'clsx';
 

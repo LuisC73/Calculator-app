@@ -1,4 +1,6 @@
-export const buttonStyles = {
+import { ButtonStyles } from "../types";
+
+export const buttonStyles: ButtonStyles = {
   'theme-primary': {
     primary:
       'text-4xl bg-theme-primary-orange-key-background text-theme-primary-text shadow-theme-primary-orange-key hover:bg-white',

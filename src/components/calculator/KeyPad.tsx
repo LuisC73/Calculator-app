@@ -16,22 +16,25 @@ export const KeyPad = ({ actionButton, actionReset, actionEqual }: KeyPadProps) 
   return (
     <div className={containerClass}>
       <div className="grid grid-cols-4 gap-6">
-        {buttonsConfig.map((button, index) => (
+        {buttonsConfig.map((button) => (
           <Button
-            key={index}
+            key={button.id}
+            id={button.id}
             label={button.label}
             type={button.type}
-            action={() => actionButton(button.label)}
+            action={() => actionButton(button.id, button.label)}
           />
         ))}
       </div>
       <div className="flex gap-4">
         <Button
+          id="reset"
           label="RESET"
           type="secondary"
           action={actionReset}
         />
         <Button
+          id="result"
           label="="
           type="danger"
           action={actionEqual}

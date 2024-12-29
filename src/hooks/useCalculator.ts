@@ -13,10 +13,10 @@ export const useCalculator = () => {
 
   if (initialTheme) setTheme(initialTheme);
 
-  const onClick = (value: string) => {
-    if (value === 'DEL' && value.length === 1) return;
+  const onClick = (id: string, value: string) => {
+    if (id === 'delete' && value.length === 1) return;
 
-    if (value === 'DEL') {
+    if (id === 'delete') {
       setDisplayValue((prev: string) => prev.slice(0, -1));
       return;
     }

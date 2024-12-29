@@ -3,7 +3,7 @@ import { buttonStyles } from '@config';
 import { clsx } from 'clsx';
 import { useTheme } from '@hooks';
 
-export const Button = ({ label, type, action }: ButtonProps) => {
+export const Button = ({ id, label, type, action }: ButtonProps) => {
   const { theme } = useTheme();
 
   const buttonClass = clsx(
@@ -13,6 +13,7 @@ export const Button = ({ label, type, action }: ButtonProps) => {
 
   return (
     <button
+      id={id}
       className={buttonClass}
       onClick={action}
     >
