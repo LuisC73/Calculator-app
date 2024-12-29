@@ -1,7 +1,7 @@
 import { KeyPadProps } from '@types';
 import { useTheme } from '@hooks';
 import { Button } from '@components';
-import { buttonsConfig } from '@content';
+import { buttonsConfig } from '@config';
 import { clsx } from 'clsx';
 
 export const KeyPad = ({ actionButton, actionReset, actionEqual }: KeyPadProps) => {
@@ -10,6 +10,7 @@ export const KeyPad = ({ actionButton, actionReset, actionEqual }: KeyPadProps) 
   const containerClass = clsx('flex flex-col gap-6 p-6 rounded-lg', {
     'bg-theme-primary-toggle-background': theme === 'theme-primary',
     'bg-theme-secondary-toggle-background': theme === 'theme-secondary',
+    'bg-theme-tertiary-toggle-background': theme === 'theme-tertiary',
   });
 
   return (

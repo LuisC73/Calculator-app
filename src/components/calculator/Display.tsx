@@ -18,9 +18,9 @@ export const Display = ({ value }: DisplayProps) => {
   );
 
   const textClass = clsx('font-bold truncate', fontSizeClass, {
-    'text-theme-primary-white': theme === 'theme-primary',
+    'text-white': theme === 'theme-primary',
     'text-theme-secondary-text': theme === 'theme-secondary',
-    'text-theme-tertiary-white': theme === 'theme-tertiary',
+    'text-theme-tertiary-text-yellow': theme === 'theme-tertiary',
   });
 
   useEffect(() => {

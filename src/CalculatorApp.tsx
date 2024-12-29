@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Display, KeyPad, Switch, SwitchItem } from '@components';
 import { evaluate } from 'mathjs';
-import { switchConfig } from '@content';
+import { switchConfig } from './config';
 import { useTheme } from '@hooks';
 import { clsx } from 'clsx';
 
@@ -37,11 +37,13 @@ export const CalculatorApp = () => {
   const containerClass = clsx('min-h-screen w-full flex flex-col justify-center items-center font-spartan', {
     'bg-theme-primary-main-background': theme === 'theme-primary',
     'bg-theme-secondary-main-background': theme === 'theme-secondary',
+    'bg-theme-tertiary-main-background': theme === 'theme-tertiary',
   });
 
   const titleClass = clsx('font-bold text-3xl', {
-    'text-theme-primary-white': theme === 'theme-primary',
+    'text-white': theme === 'theme-primary',
     'text-theme-secondary-text': theme === 'theme-secondary',
+    'text-theme-tertiary-text-yellow': theme === 'theme-tertiary',
   })
 
   return (

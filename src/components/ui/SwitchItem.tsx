@@ -12,6 +12,15 @@ export const SwitchItem = ({ id, label, active, action }: SwitchItemProps) => {
     'bg-theme-secondary-orange-key-background hover:bg-theme-primary-red-key-hover':
       theme === 'theme-secondary' && active,
     'bg-theme-secondary-toggle-background': theme === 'theme-secondary' && !active,
+    'bg-theme-tertiary-cyan-key-background hover:bg-theme-primary-red-key-hover':
+      theme === 'theme-tertiary' && active,
+    'bg-theme-tertiary-toggle-background': theme === 'theme-tertiary' && !active,
+  });
+
+  const textClass = clsx('absolute -top-7 left-1/2 font-spartan -translate-x-1/2 text-sm', {
+    'text-white': theme === 'theme-primary',
+    'text-theme-secondary-text': theme === 'theme-secondary',
+    'text-theme-tertiary-text-yellow': theme === 'theme-tertiary',
   });
 
   return (
@@ -28,9 +37,7 @@ export const SwitchItem = ({ id, label, active, action }: SwitchItemProps) => {
         className="hidden"
       />
       <div className={circleClass}></div>
-      <span className="absolute -top-7 left-1/2 font-spartan text-theme-primary-white -translate-x-1/2 text-sm">
-        {label}
-      </span>
+      <span className={textClass}>{label}</span>
     </label>
   );
 };
