@@ -7,7 +7,7 @@ export interface ButtonProps {
 
 export interface DisplayProps {
   value: string;
-  error: string;
+  error: string | null;
 }
 
 export interface SwitchProps {
