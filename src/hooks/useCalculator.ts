@@ -21,16 +21,16 @@ export const useCalculator = () => {
   }, [error]);
 
   const handleButtonClick = (id: string, value: string) => {
-    if (isResultDisplayed) {
-      setDisplayValue(value);
-      setIsResultDisplayed(false);
-      return;
-    }
-
-    if (id === 'delete' && displayValue.length === 1) return;
+    if (id === 'delete' && displayValue.length === 0) return;
 
     if (id === 'delete') {
       setDisplayValue((prev: string) => prev.slice(0, -1));
+      return;
+    }
+
+    if (isResultDisplayed) {
+      setDisplayValue(value);
+      setIsResultDisplayed(false);
       return;
     }
 
