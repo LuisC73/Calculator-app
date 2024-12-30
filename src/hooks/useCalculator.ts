@@ -4,6 +4,7 @@ import { evaluate } from 'mathjs';
 export const useCalculator = () => {
   const [displayValue, setDisplayValue] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
+  const [isResultDisplayed, setIsResultDisplayed] = useState<boolean>(false);
 
   useEffect(() => {
     if (!error) return;
@@ -11,7 +12,7 @@ export const useCalculator = () => {
     const timerError = setTimeout(() => {
       setError(null);
       setDisplayValue('');
-    }, 2000);
+    }, 2500);
 
     return () => {
       clearTimeout(timerError);
@@ -19,6 +20,12 @@ export const useCalculator = () => {
   }, [error]);
 
   const handleButtonClick = (id: string, value: string) => {
+    if (isResultDisplayed) {
+      setDisplayValue(value);
+      setIsResultDisplayed(false);
+      return;
+    }
+
     if (id === 'delete' && displayValue.length === 1) return;
 
     if (id === 'delete') {
@@ -36,6 +43,7 @@ export const useCalculator = () => {
       const processedInput = displayValue.replace(/x/g, '*');
       const evalResult = evaluate(processedInput);
       setDisplayValue(evalResult.toString());
+      setIsResultDisplayed(true);
     } catch (error: unknown) {
       if (error instanceof Error) {
         setError(error.message);
