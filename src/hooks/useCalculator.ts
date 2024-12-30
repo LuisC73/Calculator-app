@@ -5,6 +5,7 @@ export const useCalculator = () => {
   const [displayValue, setDisplayValue] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [isResultDisplayed, setIsResultDisplayed] = useState<boolean>(false);
+  const operators = ['+', '-', 'x', '/', '.'];
 
   useEffect(() => {
     if (!error) return;
@@ -33,12 +34,19 @@ export const useCalculator = () => {
       return;
     }
 
+    const lastChar = displayValue.slice(-1);
+
+    if (operators.includes(value) && operators.includes(lastChar)) return;
+
     setDisplayValue((prev: string) => prev + value);
   };
 
   const clearDisplay = () => setDisplayValue('');
 
   const calculateResult = () => {
+    const lastChar = displayValue.slice(-1);
+    if (operators.includes(lastChar)) return;
+
     try {
       const processedInput = displayValue.replace(/x/g, '*');
       const evalResult = evaluate(processedInput);
