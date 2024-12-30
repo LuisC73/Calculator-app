@@ -4,6 +4,8 @@ This is a solution to the [Calculator app challenge on Frontend Mentor](https://
 
 ## Screenshot
 
+![desktop-preview](https://github.com/user-attachments/assets/f70ca1f4-ef90-412a-a71e-4c429dc10c8e)
+
 ## Links
 
 - Live Site URL: [Add live site URL here](https://your-live-site-url.com)
