@@ -1,10 +1,15 @@
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react-swc';
+import react from '@vitejs/plugin-react';
 import path from 'path';
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(() => ({
   plugins: [react()],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './setupTests.ts',
+  },
   resolve: {
     alias: {
       '@types': path.resolve(__dirname, 'src/types'),
@@ -14,5 +19,5 @@ export default defineConfig({
       '@hooks': path.resolve(__dirname, 'src/hooks'),
       '@context': path.resolve(__dirname, 'src/context')
     }
-  }
-})
+  },
+}));
